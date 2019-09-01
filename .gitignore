@@ -1,0 +1,5 @@
+venv
+Figures
+*.pyc
+.DS_Store
+.env
