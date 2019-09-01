@@ -110,7 +110,7 @@ def allIndicators(moduleList, date):
   writer.save()
 
   writer2 = pd.ExcelWriter(str('Spreadsheets/indicator_sheet.xlsx'))
-  #writer2 = pd.ExcelWriter(str('Figures/'+record_date +'_indicator_sheet.xlsx')) #repeats over and over
+  #writer2 = pd.ExcelWriter(str('assets/'+record_date +'_indicator_sheet.xlsx')) #repeats over and over
   spreadsheet.to_excel(writer2,'Indicators', index=False)
   writer2.save()
 # END IMPORTS AND DEFS FROM Main_Indicators.py
@@ -192,9 +192,9 @@ app.layout = html.Div([
     Output('display-files', 'children'),
     [Input('list-button', 'n_clicks')])
 def display_files(nClicks):
-    listOfFiles = os.listdir('Figures/')
+    listOfFiles = os.listdir('assets/')
     for i in listOfFiles:
-        file = "Figures/"+i
+        file = "assets/"+i
         if os.path.exists(file):
             #os.remove(file)
             print("LIST "+file)
@@ -204,12 +204,12 @@ def display_files(nClicks):
     Output('erase-files', 'children'),
     [Input('erase-button', 'n_clicks')])
 def erase_files(nClicks):
-    listOfFiles = os.listdir('Figures/')
+    listOfFiles = os.listdir('assets/')
     for i in listOfFiles:
-        file = "Figures/"+i
+        file = "assets/"+i
         if os.path.exists(file):
             os.remove(file)
-            print("REMOVE1 "+file)
+            print("REMOVE "+file)
     return "|\n".join(listOfFiles)
 
 @app.callback(
@@ -222,16 +222,16 @@ def set_record_date(date, indicator):
         date = date[:10]
     print("##### current_date="+date)
     print("##### indicator   ="+indicator)
-    #if os.path.exists("Figures/i02_Mini-Dipper SPY.png"):
-    #    os.remove("Figures/i02_Mini-Dipper SPY.png")
+    #if os.path.exists("assets/i02_Mini-Dipper SPY.png"):
+    #    os.remove("assets/i02_Mini-Dipper SPY.png")
     #module = [indicator]
     #oneIndicator(module, date)
-    listOfFiles = os.listdir('Figures/')
+    listOfFiles = os.listdir('assets/')
     for i in listOfFiles:
-        file = "Figures/"+i
+        file = "assets/"+i
         if os.path.exists(file):
             #os.remove(file)
-            print("REMOVE2 "+file)
+            print("REMOVE "+file)
     modules =[name[:-3] for name in glob("i*.py")] #i.e.i01_10MSMASPY.py
     modules.sort()
     allIndicators(modules, date)
@@ -291,7 +291,7 @@ def set_image_options(date, selected_indicator):
     if date is not None:
         date = date[:10]
     #module = [name for name in glob(selected_indicator+".py")]
-    return str("Figures/"+date+"_"+selected_indicator + ".png")
+    return str("assets/"+date+"_"+selected_indicator + ".png")
 
 # @app.callback(
 #     Output('cities-dropdown', 'options'),
