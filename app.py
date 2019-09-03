@@ -208,7 +208,7 @@ def erase_files(nClicks):
     for i in listOfFiles:
         file = "Figures/"+i
         if os.path.exists(file):
-            os.remove(file)
+            ##os.remove(file)
             print("REMOVE1 "+file)
     return "|\n".join(listOfFiles)
 
@@ -231,7 +231,7 @@ def set_record_date(date, indicator):
         file = "Figures/"+i
         if os.path.exists(file):
             #os.remove(file)
-            print("REMOVE2 "+file)
+            print("REMOVE "+file)
     modules =[name[:-3] for name in glob("i*.py")] #i.e.i01_10MSMASPY.py
     modules.sort()
     allIndicators(modules, date)
@@ -291,6 +291,8 @@ def set_image_options(date, selected_indicator):
     if date is not None:
         date = date[:10]
     #module = [name for name in glob(selected_indicator+".py")]
+    print("date="+str(date)) #DEBUG
+    print("selected_indicator="+str(selected_indicator)) #DEBUG
     return str("Figures/"+date+"_"+selected_indicator + ".png")
 
 # @app.callback(
